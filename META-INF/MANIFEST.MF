@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: StudentInfo
+Bundle-SymbolicName: com.luxoft.studentInfo;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: LUXOFT
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.apache.felix.scr,
+ org.eclipse.equinox.util,
+ org.eclipse.equinox.event
+Automatic-Module-Name: com.luxoft.studentInfo
+Bundle-RequiredExecutionEnvironment: JavaSE-11
