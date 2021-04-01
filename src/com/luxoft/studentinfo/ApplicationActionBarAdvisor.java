@@ -2,7 +2,9 @@ package com.luxoft.studentinfo;
 
 import org.eclipse.jface.action.ICoolBarManager;
 import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
@@ -14,6 +16,11 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 	private IWorkbenchAction _exitAction;
 	private IWorkbenchAction _aboutAction;
 	private IWorkbenchAction _editStudentAction;
+	
+	private IWorkbenchAction _openAction;
+	private IWorkbenchAction _saveAction;
+	private IWorkbenchAction _deleteAction;
+	private IWorkbenchAction _addAction;
 	
 	public ApplicationActionBarAdvisor(IActionBarConfigurer configurer) {
 		super(configurer);
@@ -27,6 +34,15 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 		register(_aboutAction);
 		_editStudentAction = new EditStudentAction(window);
 		register(_editStudentAction);
+		
+		_openAction = new OpenAction(window);
+		register(_openAction);
+		_saveAction = new SaveAction(window);
+		register(_saveAction);
+		_deleteAction = new DeleteAction(window);
+		register(_deleteAction);
+		_addAction = new AddAction(window);
+		register(_deleteAction);
 	}
 	
 	@Override
@@ -47,7 +63,12 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 	
 	@Override
 	protected void fillCoolBar(ICoolBarManager coolBar) {
-		super.fillCoolBar(coolBar);
+		IToolBarManager toolBarManager = new ToolBarManager(coolBar.getStyle());
+		coolBar.add(toolBarManager);
+		toolBarManager.add(_openAction);
+		toolBarManager.add(_saveAction);
+		toolBarManager.add(_deleteAction);
+		toolBarManager.add(_addAction);
 	}
 
 }
