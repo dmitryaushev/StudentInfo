@@ -19,5 +19,14 @@
             id="com.luxoft.studentInfo.perspective">
       </perspective>
    </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="com.luxoft.studentinfo.GroupView"
+            id="com.luxoft.studentInfo.GroupView"
+            name="GroupView"
+            restorable="true">
+      </view>
+   </extension>
 
 </plugin>
