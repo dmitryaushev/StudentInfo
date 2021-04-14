@@ -25,7 +25,7 @@ public class GroupView extends ViewPart {
 
 	@Override
 	public void createPartControl(Composite parent) {
-		treeViewer = new TreeViewer(parent, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL);
+		treeViewer = new TreeViewer(parent, SWT.NONE | SWT.MULTI | SWT.V_SCROLL);
 		getSite().setSelectionProvider(treeViewer);
 		Platform.getAdapterManager().registerAdapters(adapterFactory, Entry.class);
 		treeViewer.setLabelProvider(new WorkbenchLabelProvider());

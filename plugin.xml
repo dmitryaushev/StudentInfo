@@ -28,5 +28,14 @@
             restorable="true">
       </view>
    </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="com.luxoft.studentinfo.InfoEditor"
+            default="false"
+            id="com.luxoft.studentInfo.InfoEditor"
+            name="InfoEditor">
+      </editor>
+   </extension>
 
 </plugin>
