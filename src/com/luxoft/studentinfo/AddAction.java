@@ -14,7 +14,7 @@ public class AddAction extends Action implements IWorkbenchAction {
 		_window = window;
 		setId(ID);
 		setText("&Add");
-		setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin("com.luxoft.studentInfo", IImageKeys.ADD));
+		setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, IImageKeys.ADD));
 	}
 
 	@Override

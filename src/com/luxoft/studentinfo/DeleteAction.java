@@ -14,7 +14,7 @@ public class DeleteAction extends Action implements IWorkbenchAction {
 		_window = window;
 		setId(ID);
 		setText("&Delete");
-		setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin("com.luxoft.studentInfo", IImageKeys.DELETE));
+		setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, IImageKeys.DELETE));
 	}
 
 	@Override

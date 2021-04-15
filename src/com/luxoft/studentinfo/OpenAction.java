@@ -14,7 +14,7 @@ public class OpenAction extends Action implements IWorkbenchAction{
 		_window = window;
 		setId(ID);
 		setText("&Add");
-		setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin("com.luxoft.studentInfo", IImageKeys.OPEN));
+		setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, IImageKeys.OPEN));
 	}
 
 	@Override

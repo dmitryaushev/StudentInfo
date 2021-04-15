@@ -14,7 +14,7 @@ public class SaveAction extends Action implements IWorkbenchAction {
 		_window = window;
 		setId(ID);
 		setText("&Save");
-		setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin("com.luxoft.studentInfo", IImageKeys.SAVE));
+		setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, IImageKeys.SAVE));
 	}
 
 	@Override
