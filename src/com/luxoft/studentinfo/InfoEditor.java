@@ -21,9 +21,12 @@ import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
 
+import com.luxoft.studentinfo.model.Student;
+
 public class InfoEditor extends EditorPart {
 
 	public static final String ID = "com.luxoft.studentInfo.InfoEditor";
+	private Student student;
 
 	public InfoEditor() {
 		// TODO Auto-generated constructor stub
@@ -45,7 +48,8 @@ public class InfoEditor extends EditorPart {
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		setSite(site);
 		setInput(input);
-		setPartName(input.getName());		
+		setPartName(input.getName());
+		student = ((InfoEditorInput) input).getStudent();
 	}
 
 	@Override
@@ -98,18 +102,23 @@ public class InfoEditor extends EditorPart {
 
 		nameLabel.setText("Name");
 		nameLabel.setLayoutData(labelData);
+		nameText.setText(student.getName());
 		nameText.setLayoutData(textData);
 		groupLabel.setText("Group");
 		groupLabel.setLayoutData(labelData);
+		groupText.setText(student.getGroup().getName());
 		groupText.setLayoutData(textData);
 		adressLabel.setText("Adress");
 		adressLabel.setLayoutData(labelData);
+		adressText.setText(student.getAdress());
 		adressText.setLayoutData(textData);
 		cityLabel.setText("City");
 		cityLabel.setLayoutData(labelData);
+		cityText.setText(student.getCity());
 		cityText.setLayoutData(textData);
 		resultLabel.setText("Result");
 		resultLabel.setLayoutData(labelData);
+		resultText.setText(String.valueOf(student.getResult()));
 		resultText.setLayoutData(textData);
 	}
 	
@@ -119,7 +128,7 @@ public class InfoEditor extends EditorPart {
 		composite.setLayout(new FillLayout());
 
 		Image image = new Image(parent.getDisplay(),
-				"C:\\Users\\DAushev\\Desktop\\homer_doh.jpg");	
+				student.getPhotoPath());	
 		Canvas canvas = new Canvas(composite, SWT.NONE);
 		canvas.addPaintListener(listener -> {
 			if (image != null) {
@@ -127,5 +136,4 @@ public class InfoEditor extends EditorPart {
 			}
 		});
 	}
-
 }

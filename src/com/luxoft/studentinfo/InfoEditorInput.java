@@ -5,11 +5,13 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IPersistableElement;
 
+import com.luxoft.studentinfo.model.Student;
+
 public class InfoEditorInput implements IEditorInput {
 	
-	private String student;
+	private Student student;
 	
-	public InfoEditorInput(String student) {
+	public InfoEditorInput(Student student) {
 		super();
 		Assert.isNotNull(student);
 		this.student = student;
@@ -35,7 +37,7 @@ public class InfoEditorInput implements IEditorInput {
 
 	@Override
 	public String getName() {
-		return student;
+		return student.getName();
 	}
 
 	@Override
@@ -46,7 +48,7 @@ public class InfoEditorInput implements IEditorInput {
 
 	@Override
 	public String getToolTipText() {
-		return student;
+		return student.getName();
 	}
 
 	@Override
@@ -74,4 +76,7 @@ public class InfoEditorInput implements IEditorInput {
 		return true;
 	}
 
+	public Student getStudent() {
+		return student;
+	}
 }
