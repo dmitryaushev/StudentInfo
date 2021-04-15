@@ -2,9 +2,11 @@ package com.luxoft.studentinfo;
 
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.eclipse.ui.part.ViewPart;
@@ -18,6 +20,8 @@ public class GroupView extends ViewPart {
 	public static final String ID = "com.luxoft.studentInfo.GroupView";
 	private TreeViewer treeViewer;
 	private IAdapterFactory adapterFactory = new AdapterFactory();
+	
+	private Action infoAction = new InfoAction(PlatformUI.getWorkbench().getWorkbenchWindows()[0]);
 
 	public GroupView() {
 		// TODO Auto-generated constructor stub
@@ -31,6 +35,7 @@ public class GroupView extends ViewPart {
 		treeViewer.setLabelProvider(new WorkbenchLabelProvider());
 		treeViewer.setContentProvider(new BaseWorkbenchContentProvider());
 		treeViewer.setInput(createGroup());
+		treeViewer.addDoubleClickListener(event -> infoAction.run());
 	}
 
 	@Override

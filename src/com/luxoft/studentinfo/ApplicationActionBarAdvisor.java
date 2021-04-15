@@ -22,8 +22,6 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 	private IWorkbenchAction _deleteAction;
 	private IWorkbenchAction _addAction;
 	
-	private IWorkbenchAction _infoAction;
-	
 	public ApplicationActionBarAdvisor(IActionBarConfigurer configurer) {
 		super(configurer);
 	}
@@ -45,9 +43,6 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 		register(_deleteAction);
 		_addAction = new AddAction(window);
 		register(_deleteAction);
-		
-		_infoAction = new InfoAction(window);
-		register(_infoAction);
 	}
 	
 	@Override
@@ -74,7 +69,6 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 		toolBarManager.add(_saveAction);
 		toolBarManager.add(_deleteAction);
 		toolBarManager.add(_addAction);
-		toolBarManager.add(_infoAction);
 	}
 
 }
