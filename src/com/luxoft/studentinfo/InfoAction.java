@@ -45,24 +45,13 @@ public class InfoAction extends Action implements ISelectionListener, IWorkbench
 
 	@Override
 	public void run() {
-//		Object item = selection.getFirstElement();
-//		Student student = (Student) item;
-//		IWorkbenchPage page = window.getActivePage();
-//		InfoEditorInput input = new InfoEditorInput(student);
-//		try {
-//			page.openEditor(input, InfoEditor.ID);
-//		} catch (PartInitException e) {
-//		}
-		
-		Iterator i = selection.iterator();
-		while(i.hasNext()) {
-			Student s = (Student) i.next();
-			IWorkbenchPage p = window.getActivePage();
-			InfoEditorInput in = new InfoEditorInput(s);
-			try {
-				p.openEditor(in, InfoEditor.ID);
-			} catch (PartInitException e) {
-			}
+		Object item = selection.getFirstElement();
+		Student student = (Student) item;
+		IWorkbenchPage page = window.getActivePage();
+		InfoEditorInput input = new InfoEditorInput(student);
+		try {
+			page.openEditor(input, InfoEditor.ID);
+		} catch (PartInitException e) {
 		}
 	}
 }
