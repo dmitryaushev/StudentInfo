@@ -3,6 +3,9 @@ package com.luxoft.studentinfo;
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.viewers.AbstractTreeViewer;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -20,7 +23,7 @@ public class GroupView extends ViewPart {
 	public static final String ID = "com.luxoft.studentInfo.GroupView";
 	private TreeViewer treeViewer;
 	private IAdapterFactory adapterFactory = new AdapterFactory();
-	
+
 	private Action infoAction = new InfoAction(PlatformUI.getWorkbench().getWorkbenchWindows()[0]);
 
 	public GroupView() {
@@ -35,7 +38,19 @@ public class GroupView extends ViewPart {
 		treeViewer.setLabelProvider(new WorkbenchLabelProvider());
 		treeViewer.setContentProvider(new BaseWorkbenchContentProvider());
 		treeViewer.setInput(createGroup());
-		treeViewer.addDoubleClickListener(event -> infoAction.run());
+		treeViewer.addDoubleClickListener(event -> {
+			
+			IStructuredSelection selection = (IStructuredSelection) event.getSelection();
+			Object selectedObject = selection.getFirstElement();
+			ITreeContentProvider provider = (ITreeContentProvider) treeViewer.getContentProvider();
+			if (!provider.hasChildren(selectedObject)) {
+				infoAction.run();
+			} else if (treeViewer.getExpandedState(selectedObject)) {
+				treeViewer.collapseToLevel(selectedObject, AbstractTreeViewer.ALL_LEVELS);
+			} else {
+				treeViewer.expandToLevel(selectedObject, 1);
+			}
+		});
 	}
 
 	@Override
