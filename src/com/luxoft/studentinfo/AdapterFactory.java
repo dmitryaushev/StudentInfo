@@ -38,7 +38,7 @@ public class AdapterFactory implements IAdapterFactory {
 
 		@Override
 		public Object getParent(Object o) {
-			return ((Group) o).getParent();
+			return ((Student) o).getParent();
 		}
 
 		@Override
