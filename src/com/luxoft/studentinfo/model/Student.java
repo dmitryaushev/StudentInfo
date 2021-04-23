@@ -18,6 +18,10 @@ public class Student extends Entry{
 		this.photoPath = photoPath;
 	}
 	
+	public Student() {
+		
+	}
+	
 	public String getName() {
 		return name;
 	}
