@@ -39,6 +39,7 @@ public class PopulateStudentDialog extends Dialog {
 	private String photoPath;
 	
 	private Student student;
+	private String studentGroupName;
 
 	public PopulateStudentDialog(Shell parentShell) {
 		super(parentShell);
@@ -92,6 +93,11 @@ public class PopulateStudentDialog extends Dialog {
 			cityText.setText(student.getCity());
 			resultText.setText(String.valueOf(student.getResult()));
 			photoNameText.setText(student.getPhotoPath());
+		}
+		
+		if (studentGroupName != null) {
+			groupText.setText(studentGroupName);
+			groupText.setEditable(false);
 		}
 
 		return composite;
@@ -151,4 +157,7 @@ public class PopulateStudentDialog extends Dialog {
 		this.student = student;
 	}
 
+	public void setStudentGroupName(String studentGroupName) {
+		this.studentGroupName = studentGroupName;
+	}
 }

@@ -1,7 +1,11 @@
 package com.luxoft.studentinfo.action;
 
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.window.Window;
+import org.eclipse.ui.ISelectionListener;
+import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -16,16 +20,18 @@ import com.luxoft.studentinfo.model.Student;
 import com.luxoft.studentinfo.util.IImageKeys;
 import com.luxoft.studentinfo.view.ViewManager;
 
-public class AddStudentAction extends Action implements IWorkbenchAction {
+public class AddStudentAction extends Action implements IWorkbenchAction, ISelectionListener {
 
 	public final static String ID = "com.luxoft.studentInfo.add";
 	private final IWorkbenchWindow _window;
+	private IStructuredSelection _selection;
 
 	public AddStudentAction(IWorkbenchWindow window) {
 		_window = window;
 		setId(ID);
 		setText("&Add student");
 		setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, IImageKeys.ADD));
+		window.getSelectionService().addSelectionListener(this);
 	}
 
 	@Override
@@ -35,8 +41,19 @@ public class AddStudentAction extends Action implements IWorkbenchAction {
 	}
 
 	@Override
+	public void selectionChanged(IWorkbenchPart part, ISelection incoming) {
+		_selection = (IStructuredSelection) incoming;
+	}
+	
+	@Override
 	public void run() {
 		PopulateStudentDialog dialog = new PopulateStudentDialog(_window.getShell());
+		
+		if (_selection != null) {
+			Group group = (Group) _selection.getFirstElement();
+			dialog.setStudentGroupName(group.getName());
+		}
+		
 		if (dialog.open() == Window.OK) {
 
 			String name = dialog.getName();
@@ -74,4 +91,5 @@ public class AddStudentAction extends Action implements IWorkbenchAction {
 			ViewManager.getInstance().getTreeViewer().refresh();
 		}
 	}
+
 }
