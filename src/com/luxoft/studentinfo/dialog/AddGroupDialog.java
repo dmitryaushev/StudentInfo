@@ -1,4 +1,4 @@
-package com.luxoft.studentinfo;
+package com.luxoft.studentinfo.dialog;
 
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
@@ -15,7 +15,7 @@ public class AddGroupDialog extends Dialog {
 	private Text nameText;
 	private String name;
 
-	protected AddGroupDialog(Shell parentShell) {
+	public AddGroupDialog(Shell parentShell) {
 		super(parentShell);
 	}
 

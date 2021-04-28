@@ -1,4 +1,4 @@
-package com.luxoft.studentinfo;
+package com.luxoft.studentinfo.view;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.resource.ImageDescriptor;

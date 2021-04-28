@@ -1,6 +1,6 @@
 package com.luxoft.studentinfo.model;
 
-import com.luxoft.studentinfo.FileManager;
+import com.luxoft.studentinfo.util.FileManager;
 
 public class ModelManager {
 

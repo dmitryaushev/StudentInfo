@@ -1,4 +1,4 @@
-package com.luxoft.studentinfo;
+package com.luxoft.studentinfo.action;
 
 import java.util.Iterator;
 
@@ -13,6 +13,8 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 
 import com.luxoft.studentinfo.model.Student;
+import com.luxoft.studentinfo.view.InfoEditor;
+import com.luxoft.studentinfo.view.InfoEditorInput;
 
 public class InfoAction extends Action implements ISelectionListener, IWorkbenchAction {
 

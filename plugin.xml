@@ -22,7 +22,7 @@
    <extension
          point="org.eclipse.ui.views">
       <view
-            class="com.luxoft.studentinfo.GroupView"
+            class="com.luxoft.studentinfo.view.GroupView"
             id="com.luxoft.studentInfo.GroupView"
             name="GroupView"
             restorable="true">
@@ -31,7 +31,7 @@
    <extension
          point="org.eclipse.ui.editors">
       <editor
-            class="com.luxoft.studentinfo.InfoEditor"
+            class="com.luxoft.studentinfo.view.InfoEditor"
             default="false"
             id="com.luxoft.studentInfo.InfoEditor"
             name="InfoEditor">

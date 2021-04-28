@@ -1,4 +1,4 @@
-package com.luxoft.studentinfo;
+package com.luxoft.studentinfo.action;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.window.Window;
@@ -6,18 +6,22 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
+import com.luxoft.studentinfo.Application;
+import com.luxoft.studentinfo.dialog.AddStudentDialog;
 import com.luxoft.studentinfo.model.Entry;
 import com.luxoft.studentinfo.model.Folder;
 import com.luxoft.studentinfo.model.Group;
 import com.luxoft.studentinfo.model.ModelManager;
 import com.luxoft.studentinfo.model.Student;
+import com.luxoft.studentinfo.util.IImageKeys;
+import com.luxoft.studentinfo.view.ViewManager;
 
-public class AddAction extends Action implements IWorkbenchAction {
+public class AddStudentAction extends Action implements IWorkbenchAction {
 
 	public final static String ID = "com.luxoft.studentInfo.add";
 	private final IWorkbenchWindow _window;
 
-	public AddAction(IWorkbenchWindow window) {
+	public AddStudentAction(IWorkbenchWindow window) {
 		_window = window;
 		setId(ID);
 		setText("&Add student");

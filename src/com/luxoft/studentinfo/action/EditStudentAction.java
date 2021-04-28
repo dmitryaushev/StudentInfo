@@ -1,4 +1,4 @@
-package com.luxoft.studentinfo;
+package com.luxoft.studentinfo.action;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.ISelection;

@@ -1,4 +1,4 @@
-package com.luxoft.studentinfo;
+package com.luxoft.studentinfo.dialog;
 
 import java.io.File;
 import java.io.IOException;

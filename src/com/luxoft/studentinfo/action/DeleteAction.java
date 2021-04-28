@@ -1,4 +1,4 @@
-package com.luxoft.studentinfo;
+package com.luxoft.studentinfo.action;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.ISelection;
@@ -10,10 +10,13 @@ import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 import org.eclipse.ui.internal.e4.compatibility.SelectionService;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
+import com.luxoft.studentinfo.Application;
 import com.luxoft.studentinfo.model.Entry;
 import com.luxoft.studentinfo.model.Group;
 import com.luxoft.studentinfo.model.ModelManager;
 import com.luxoft.studentinfo.model.Student;
+import com.luxoft.studentinfo.util.IImageKeys;
+import com.luxoft.studentinfo.view.ViewManager;
 
 public class DeleteAction extends Action implements ISelectionListener, IWorkbenchAction {
 

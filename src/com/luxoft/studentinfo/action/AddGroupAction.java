@@ -1,13 +1,15 @@
-package com.luxoft.studentinfo;
+package com.luxoft.studentinfo.action;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.window.Window;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 
+import com.luxoft.studentinfo.dialog.AddGroupDialog;
 import com.luxoft.studentinfo.model.Folder;
 import com.luxoft.studentinfo.model.Group;
 import com.luxoft.studentinfo.model.ModelManager;
+import com.luxoft.studentinfo.view.ViewManager;
 
 public class AddGroupAction extends Action implements IWorkbenchAction {
 

@@ -1,9 +1,12 @@
-package com.luxoft.studentinfo;
+package com.luxoft.studentinfo.action;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+
+import com.luxoft.studentinfo.Application;
+import com.luxoft.studentinfo.util.IImageKeys;
 
 public class SaveAction extends Action implements IWorkbenchAction {
 	

@@ -11,6 +11,12 @@ import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
 
+import com.luxoft.studentinfo.action.AddStudentAction;
+import com.luxoft.studentinfo.action.DeleteAction;
+import com.luxoft.studentinfo.action.EditStudentAction;
+import com.luxoft.studentinfo.action.OpenAction;
+import com.luxoft.studentinfo.action.SaveAction;
+
 public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 	
 	private IWorkbenchAction _exitAction;
@@ -41,7 +47,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 		register(_saveAction);
 		_deleteAction = new DeleteAction(window);
 		register(_deleteAction);
-		_addAction = new AddAction(window);
+		_addAction = new AddStudentAction(window);
 		register(_deleteAction);
 	}
 	

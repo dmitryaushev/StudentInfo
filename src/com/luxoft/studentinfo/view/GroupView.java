@@ -1,4 +1,4 @@
-package com.luxoft.studentinfo;
+package com.luxoft.studentinfo.view;
 
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.core.runtime.Platform;
@@ -15,6 +15,10 @@ import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.eclipse.ui.part.ViewPart;
 
+import com.luxoft.studentinfo.action.AddStudentAction;
+import com.luxoft.studentinfo.action.AddGroupAction;
+import com.luxoft.studentinfo.action.DeleteAction;
+import com.luxoft.studentinfo.action.InfoAction;
 import com.luxoft.studentinfo.model.Entry;
 import com.luxoft.studentinfo.model.Group;
 import com.luxoft.studentinfo.model.ModelManager;
@@ -28,7 +32,7 @@ public class GroupView extends ViewPart {
 
 	private Action infoAction = new InfoAction(PlatformUI.getWorkbench().getWorkbenchWindows()[0]);
 	private Action deleteAction = new DeleteAction(PlatformUI.getWorkbench().getWorkbenchWindows()[0]);
-	private Action addAction = new AddAction(PlatformUI.getWorkbench().getWorkbenchWindows()[0]);
+	private Action addAction = new AddStudentAction(PlatformUI.getWorkbench().getWorkbenchWindows()[0]);
 	private Action addGroupAction = new AddGroupAction(PlatformUI.getWorkbench().getWorkbenchWindows()[0]);
 
 	public GroupView() {

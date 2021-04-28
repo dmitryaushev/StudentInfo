@@ -1,4 +1,4 @@
-package com.luxoft.studentinfo;
+package com.luxoft.studentinfo.util;
 
 import com.luxoft.studentinfo.model.Folder;
 import com.luxoft.studentinfo.model.Group;

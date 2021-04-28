@@ -1,13 +1,15 @@
-package com.luxoft.studentinfo;
+package com.luxoft.studentinfo.view;
 
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.model.IWorkbenchAdapter;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
+import com.luxoft.studentinfo.Application;
 import com.luxoft.studentinfo.model.Folder;
 import com.luxoft.studentinfo.model.Group;
 import com.luxoft.studentinfo.model.Student;
+import com.luxoft.studentinfo.util.IImageKeys;
 
 public class AdapterFactory implements IAdapterFactory {
 
