@@ -20,13 +20,16 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-public class AddStudentDialog extends Dialog {
+import com.luxoft.studentinfo.model.Student;
+
+public class PopulateStudentDialog extends Dialog {
 
 	private Text nameText;
 	private Text groupText;
 	private Text adressText;
 	private Text cityText;
 	private Text resultText;
+	private Text photoNameText;
 
 	private String name;
 	private String group;
@@ -34,12 +37,10 @@ public class AddStudentDialog extends Dialog {
 	private String city;
 	private String result;
 	private String photoPath;
+	
+	private Student student;
 
-	private String uploadPhotoPath;
-	private String uploadPhotoName;
-	private String photoName;
-
-	public AddStudentDialog(Shell parentShell) {
+	public PopulateStudentDialog(Shell parentShell) {
 		super(parentShell);
 	}
 
@@ -60,7 +61,7 @@ public class AddStudentDialog extends Dialog {
 		resultText = new Text(composite, SWT.BORDER);
 
 		Label photoNameLabel = new Label(composite, SWT.NONE);
-		Text photoNameText = new Text(composite, SWT.BORDER);
+		photoNameText = new Text(composite, SWT.BORDER);
 		photoNameText.setEditable(false);
 
 		Button button = new Button(composite, SWT.PUSH);
@@ -70,11 +71,9 @@ public class AddStudentDialog extends Dialog {
 
 				FileDialog dialog = new FileDialog(parent.getShell(), SWT.OPEN);
 				dialog.setFilterExtensions(new String[] { "*.png", "*.jpg", "*.jpeg" });
-
-				uploadPhotoPath = dialog.open();
-				uploadPhotoName = dialog.getFileName();
-
-				photoNameText.setText(uploadPhotoName);
+				
+				photoPath = dialog.open();
+				photoNameText.setText(photoPath);
 
 			}
 		});
@@ -85,6 +84,15 @@ public class AddStudentDialog extends Dialog {
 		cityLabel.setText("City");
 		resultLabel.setText("Result");
 		photoNameLabel.setText("Photo name");
+		
+		if (student != null) {
+			nameText.setText(student.getName());
+			groupText.setText(student.getGroup().getName());
+			adressText.setText(student.getAdress());
+			cityText.setText(student.getCity());
+			resultText.setText(String.valueOf(student.getResult()));
+			photoNameText.setText(student.getPhotoPath());
+		}
 
 		return composite;
 	}
@@ -103,7 +111,6 @@ public class AddStudentDialog extends Dialog {
 	@Override
 	protected void okPressed() {
 		saveInput();
-		copyPhoto();
 		super.okPressed();
 	}
 
@@ -113,25 +120,7 @@ public class AddStudentDialog extends Dialog {
 		adress = adressText.getText();
 		city = cityText.getText();
 		result = resultText.getText();
-	}
-
-	private void copyPhoto() {
-
-		String[] arr = uploadPhotoName.split("\\.");
-		String extension = arr[arr.length - 1];
-
-		photoName = String.format("%s-%s-%s-%s.%s", name, group, adress, city, extension);
-		photoPath = String.format("%s%sphotos%s%s", System.getProperty("user.dir"), File.separator, File.separator,
-				photoName);
-
-		Path src = Paths.get(uploadPhotoPath);
-		Path dest = Paths.get(photoPath);
-
-		try {
-			Files.copy(src, dest);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		photoPath = photoNameText.getText();
 	}
 
 	public String getName() {
@@ -156,6 +145,10 @@ public class AddStudentDialog extends Dialog {
 
 	public String getPhotoPath() {
 		return photoPath;
+	}
+	
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
 }

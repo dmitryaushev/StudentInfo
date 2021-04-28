@@ -7,7 +7,7 @@ import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 import com.luxoft.studentinfo.Application;
-import com.luxoft.studentinfo.dialog.AddStudentDialog;
+import com.luxoft.studentinfo.dialog.PopulateStudentDialog;
 import com.luxoft.studentinfo.model.Entry;
 import com.luxoft.studentinfo.model.Folder;
 import com.luxoft.studentinfo.model.Group;
@@ -36,7 +36,7 @@ public class AddStudentAction extends Action implements IWorkbenchAction {
 
 	@Override
 	public void run() {
-		AddStudentDialog dialog = new AddStudentDialog(_window.getShell());
+		PopulateStudentDialog dialog = new PopulateStudentDialog(_window.getShell());
 		if (dialog.open() == Window.OK) {
 
 			String name = dialog.getName();
