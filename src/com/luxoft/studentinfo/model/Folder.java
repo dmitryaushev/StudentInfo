@@ -3,22 +3,22 @@ package com.luxoft.studentinfo.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Group extends Entry{
+public class Folder extends Entry {
 
-	private Folder parent;
+	private Group parent;
 	private List entries;
 	private String name;
 	
-	public Group(Folder parent, String name) {
+	public Folder(Group parent, String name) {
 		this.parent = parent;
 		this.name = name;
 	}
 
-	public Folder getParent() {
+	public Group getParent() {
 		return parent;
 	}
 
-	public void setParent(Folder parent) {
+	public void setParent(Group parent) {
 		this.parent = parent;
 	}
 
@@ -50,4 +50,5 @@ public class Group extends Entry{
 			return (Entry[]) entries.toArray(new Entry[entries.size()]);
 		return new Entry[0];
 	}
+
 }

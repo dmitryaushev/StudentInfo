@@ -7,6 +7,7 @@ import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 import com.luxoft.studentinfo.model.Entry;
+import com.luxoft.studentinfo.model.Folder;
 import com.luxoft.studentinfo.model.Group;
 import com.luxoft.studentinfo.model.ModelManager;
 import com.luxoft.studentinfo.model.Student;
@@ -19,7 +20,7 @@ public class AddAction extends Action implements IWorkbenchAction {
 	public AddAction(IWorkbenchWindow window) {
 		_window = window;
 		setId(ID);
-		setText("&Add");
+		setText("&Add student");
 		setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, IImageKeys.ADD));
 	}
 
@@ -50,7 +51,7 @@ public class AddAction extends Action implements IWorkbenchAction {
 
 			Group group;
 			Group root = ModelManager.getInstance().getStateModel().getRoot();
-			Group folder = (Group) root.getEntries()[0];
+			Folder folder = (Folder) root.getEntries()[0];
 			Entry[] groups = folder.getEntries();
 
 			for (Entry e : groups) {

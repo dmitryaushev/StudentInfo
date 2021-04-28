@@ -1,5 +1,6 @@
 package com.luxoft.studentinfo;
 
+import com.luxoft.studentinfo.model.Folder;
 import com.luxoft.studentinfo.model.Group;
 import com.luxoft.studentinfo.model.Student;
 
@@ -8,7 +9,7 @@ public class FileManager {
 	public static Group populate() {
 		Group root = new Group(null, "root");
 
-		Group folder = new Group(root, "Folder");
+		Folder folder = new Folder(root, "Folder");
 		root.addEntry(folder);
 
 		Group group1 = new Group(folder, "Group 1");

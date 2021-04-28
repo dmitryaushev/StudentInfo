@@ -23,7 +23,7 @@ public class InfoAction extends Action implements ISelectionListener, IWorkbench
 	public InfoAction(IWorkbenchWindow window) {
 		this.window = window;
 		setId(ID);
-		setText("&Info");
+		setText("&Open student");
 		setToolTipText("Info of selected student");
 		window.getSelectionService().addSelectionListener(this);
 	}

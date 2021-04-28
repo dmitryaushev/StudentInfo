@@ -65,5 +65,10 @@ public class Student extends Entry{
 	public Group getParent() {
 		return group;
 	}
+
+	@Override
+	public void removeEntry(Entry entry) {
+	
+	}
 	
 }

@@ -5,6 +5,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.model.IWorkbenchAdapter;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
+import com.luxoft.studentinfo.model.Folder;
 import com.luxoft.studentinfo.model.Group;
 import com.luxoft.studentinfo.model.Student;
 
@@ -33,6 +34,31 @@ public class AdapterFactory implements IAdapterFactory {
 			return ((Group) o).getEntries();
 		}
 	};
+	
+	private IWorkbenchAdapter folderAdapter = new IWorkbenchAdapter() {
+
+		@Override
+		public Object getParent(Object o) {
+			return ((Folder) o).getParent();
+		}
+
+		@Override
+		public String getLabel(Object o) {
+			Folder folder = (Folder) o;
+			return folder.getName();
+		}
+
+		@Override
+		public ImageDescriptor getImageDescriptor(Object object) {
+			return AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, IImageKeys.FOLDER);
+		}
+
+		@Override
+		public Object[] getChildren(Object o) {
+			return ((Folder) o).getEntries();
+		}
+	};
+
 
 	private IWorkbenchAdapter entryAdapter = new IWorkbenchAdapter() {
 
@@ -65,6 +91,9 @@ public class AdapterFactory implements IAdapterFactory {
 		}
 		if (adapterType == IWorkbenchAdapter.class && adaptableObject instanceof Student) {
 			return entryAdapter;
+		}
+		if (adapterType == IWorkbenchAdapter.class && adaptableObject instanceof Folder) {
+			return folderAdapter;
 		}
 		return null;
 	}
