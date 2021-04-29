@@ -1,7 +1,5 @@
 package com.luxoft.studentinfo.action;
 
-import java.util.Iterator;
-
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -25,6 +23,7 @@ public class InfoAction extends Action implements ISelectionListener, IWorkbench
 	public InfoAction(IWorkbenchWindow window) {
 		this.window = window;
 		setId(ID);
+		setActionDefinitionId(ID);
 		setText("&Open student");
 		setToolTipText("Info of selected student");
 		window.getSelectionService().addSelectionListener(this);

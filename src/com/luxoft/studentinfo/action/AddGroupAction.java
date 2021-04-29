@@ -19,6 +19,7 @@ public class AddGroupAction extends Action implements IWorkbenchAction {
 	public AddGroupAction(IWorkbenchWindow window) {
 		_window = window;
 		setId(ID);
+		setActionDefinitionId(ID);
 		setText("&Add group");
 	}
 

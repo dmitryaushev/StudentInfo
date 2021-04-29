@@ -16,6 +16,7 @@ public class SaveAction extends Action implements IWorkbenchAction {
 	public SaveAction(IWorkbenchWindow window) {
 		_window = window;
 		setId(ID);
+		setActionDefinitionId(ID);
 		setText("&Save");
 		setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, IImageKeys.SAVE));
 	}

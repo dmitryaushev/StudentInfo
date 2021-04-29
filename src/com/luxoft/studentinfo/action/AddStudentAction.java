@@ -22,13 +22,14 @@ import com.luxoft.studentinfo.view.ViewManager;
 
 public class AddStudentAction extends Action implements IWorkbenchAction, ISelectionListener {
 
-	public final static String ID = "com.luxoft.studentInfo.add";
+	public final static String ID = "com.luxoft.studentInfo.addStudent";
 	private final IWorkbenchWindow _window;
 	private IStructuredSelection _selection;
 
 	public AddStudentAction(IWorkbenchWindow window) {
 		_window = window;
 		setId(ID);
+		setActionDefinitionId(ID);
 		setText("&Add student");
 		setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, IImageKeys.ADD));
 		window.getSelectionService().addSelectionListener(this);
@@ -49,7 +50,7 @@ public class AddStudentAction extends Action implements IWorkbenchAction, ISelec
 	public void run() {
 		PopulateStudentDialog dialog = new PopulateStudentDialog(_window.getShell());
 		
-		if (_selection != null) {
+		if (_selection != null && _selection.getFirstElement() instanceof Group) {
 			Group group = (Group) _selection.getFirstElement();
 			dialog.setStudentGroupName(group.getName());
 		}

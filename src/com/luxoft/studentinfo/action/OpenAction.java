@@ -16,7 +16,8 @@ public class OpenAction extends Action implements IWorkbenchAction{
 	public OpenAction(IWorkbenchWindow window) {
 		_window = window;
 		setId(ID);
-		setText("&Add");
+		setActionDefinitionId(ID);
+		setText("&Open");
 		setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, IImageKeys.OPEN));
 	}
 

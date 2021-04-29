@@ -7,14 +7,10 @@ import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
-import org.eclipse.ui.internal.e4.compatibility.SelectionService;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 import com.luxoft.studentinfo.Application;
 import com.luxoft.studentinfo.model.Entry;
-import com.luxoft.studentinfo.model.Group;
-import com.luxoft.studentinfo.model.ModelManager;
-import com.luxoft.studentinfo.model.Student;
 import com.luxoft.studentinfo.util.IImageKeys;
 import com.luxoft.studentinfo.view.ViewManager;
 
@@ -27,6 +23,7 @@ public class DeleteAction extends Action implements ISelectionListener, IWorkben
 	public DeleteAction(IWorkbenchWindow window) {
 		_window = window;
 		setId(ID);
+		setActionDefinitionId(ID);
 		setText("&Delete");
 		setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, IImageKeys.DELETE));
 		window.getSelectionService().addSelectionListener(this);

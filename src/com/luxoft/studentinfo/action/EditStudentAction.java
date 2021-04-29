@@ -15,7 +15,6 @@ import com.luxoft.studentinfo.model.Folder;
 import com.luxoft.studentinfo.model.Group;
 import com.luxoft.studentinfo.model.ModelManager;
 import com.luxoft.studentinfo.model.Student;
-import com.luxoft.studentinfo.view.InfoEditor;
 import com.luxoft.studentinfo.view.ViewManager;
 
 public class EditStudentAction extends Action implements ISelectionListener, IWorkbenchAction {
@@ -27,6 +26,7 @@ public class EditStudentAction extends Action implements ISelectionListener, IWo
 	public EditStudentAction(IWorkbenchWindow window) {
 		_window = window;
 		setId(ID);
+		setActionDefinitionId(ID);
 		setText("&Edit student");
 		window.getSelectionService().addSelectionListener(this);
 	}
