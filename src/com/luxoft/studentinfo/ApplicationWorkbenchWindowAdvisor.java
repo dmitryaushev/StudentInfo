@@ -5,6 +5,7 @@ import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
 import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
 import org.eclipse.ui.application.WorkbenchWindowAdvisor;
+import org.eclipse.ui.part.EditorInputTransfer;
 
 public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 
@@ -25,5 +26,8 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
         configurer.setShowStatusLine(false);
         configurer.setShowMenuBar(true);
         configurer.setTitle("Student info");
+        
+        configurer.addEditorAreaTransfer(EditorInputTransfer.getInstance());
+        configurer.configureEditorAreaDropListener(new EditorAreaDropAdapter(configurer.getWindow()));
     }
 }
