@@ -69,8 +69,7 @@ public class EditStudentAction extends Action implements ISelectionListener, IWo
 			String studentGroupName = student.getGroup().getName();
 			if (!studentGroupName.equals(groupName)) {
 				Group group;
-				Group root = ModelManager.getInstance().getStateModel().getRoot();
-				Folder folder = (Folder) root.getEntries()[0];
+				Folder folder = ModelManager.getInstance().getStateModel().getFolder();
 				Entry[] groups = folder.getEntries();
 				for (Entry e : groups) {
 					if (e.getName().equals(studentGroupName)) {

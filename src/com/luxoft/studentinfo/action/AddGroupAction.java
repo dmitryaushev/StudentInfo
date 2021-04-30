@@ -33,8 +33,7 @@ public class AddGroupAction extends Action implements IWorkbenchAction {
 		if (dialog.open() == Window.OK) {
 			String name = dialog.getName();
 			
-			Group root = ModelManager.getInstance().getStateModel().getRoot();
-			Folder folder = (Folder) root.getEntries()[0];
+			Folder folder = ModelManager.getInstance().getStateModel().getFolder();
 			Group group = new Group(folder, name);
 			folder.addEntry(group);
 			

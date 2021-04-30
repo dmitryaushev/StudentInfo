@@ -72,8 +72,7 @@ public class AddStudentAction extends Action implements IWorkbenchAction, ISelec
 			student.setPhotoPath(photoPath);
 
 			Group group;
-			Group root = ModelManager.getInstance().getStateModel().getRoot();
-			Folder folder = (Folder) root.getEntries()[0];
+			Folder folder = ModelManager.getInstance().getStateModel().getFolder();
 			Entry[] groups = folder.getEntries();
 
 			for (Entry e : groups) {

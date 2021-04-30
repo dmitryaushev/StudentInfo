@@ -51,4 +51,7 @@ public class Folder extends Entry {
 		return new Entry[0];
 	}
 
+	public void clearEnties() {
+		entries.clear();
+	}
 }

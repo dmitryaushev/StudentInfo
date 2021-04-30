@@ -1,31 +1,92 @@
 package com.luxoft.studentinfo.util;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
+import com.luxoft.studentinfo.model.Entry;
 import com.luxoft.studentinfo.model.Folder;
 import com.luxoft.studentinfo.model.Group;
+import com.luxoft.studentinfo.model.ModelManager;
 import com.luxoft.studentinfo.model.Student;
+import com.luxoft.studentinfo.model.StudentDto;
 
 public class FileManager {
 
-	public static Group populate() {
-		Group root = new Group(null, "root");
+	private static Folder folder = ModelManager.getInstance().getStateModel().getFolder();
+	private static List<Group> groups = ModelManager.getInstance().getStateModel().getGroups();
 
-		Folder folder = new Folder(root, "Folder");
-		root.addEntry(folder);
+	public static void saveToFile(String path) {
+		Entry[] entries = folder.getEntries();
+		List<StudentDto> studentDtos = new ArrayList<>();
 
-		Group group1 = new Group(folder, "Group 1");
-		folder.addEntry(group1);
-		group1.addEntry(new Student("dima", group1, "ukraine", "kiev", 1,
-				"C:\\Users\\DAushev\\eclipse-workspace_3\\com.luxoft.studentInfo\\photos\\dima.jpg"));
-		group1.addEntry(new Student("anya", group1, "ukraine", "kherson", 2,
-				"C:\\Users\\DAushev\\eclipse-workspace_3\\com.luxoft.studentInfo\\photos\\anya.jpg"));
+		for (Entry entry : entries) {
+			Group group = (Group) entry;
+			Entry[] students = group.getEntries();
+			for (Entry s : students) {
+				Student student = (Student) s;
+				StudentDto studentDto = toDto(student);
+				studentDtos.add(studentDto);
+			}
+		}
+		String json = new Gson().toJson(studentDtos);
+		try {
+			Files.write(Paths.get(path), json.getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-		Group group2 = new Group(folder, "Group 2");
-		folder.addEntry(group2);
-		group2.addEntry(new Student("denis", group2, "ukraine", "khemelnitskiy", 3,
-				"C:\\Users\\DAushev\\eclipse-workspace_3\\com.luxoft.studentInfo\\photos\\denis.jpg"));
-		group2.addEntry(new Student("lera", group2, "ukraine", "kiev", 34,
-				"C:\\Users\\DAushev\\eclipse-workspace_3\\com.luxoft.studentInfo\\photos\\lera.jpg"));
+	public static void readFromFile(String path) {
+		try {
+			groups.clear();
+			String json = Files.readString(Paths.get(path));
+			Type listType = new TypeToken<List<StudentDto>>() {
+			}.getType();
+			List<StudentDto> studentDtos = new Gson().fromJson(json, listType);
+			if (studentDtos != null) {
+				studentDtos.forEach(studentDto -> fromDto(studentDto));
+				folder.clearEnties();
+				groups.forEach(group -> folder.addEntry(group));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (JsonSyntaxException e) {
+			e.printStackTrace();
+		}
+	}
 
-		return root;
+	private static StudentDto toDto(Student student) {
+		return new StudentDto(student.getName(), student.getGroup().getName(), student.getAdress(), student.getCity(),
+				student.getResult(), student.getPhotoPath());
+	}
+
+	private static void fromDto(StudentDto studentDto) {
+		String groupName = studentDto.getGroup();
+		Group group = null;
+		for (Group g : groups) {
+			if (g.getName().equals(groupName)) {
+				group = g;
+				break;
+			}
+		}
+		if (groups.isEmpty()) {
+			group = new Group(folder, groupName);
+			folder.addEntry(group);
+			groups.add(group);
+		}
+		if (group == null) {
+			group = new Group(folder, groupName);
+			groups.add(group);
+		}
+		Student student = new Student(studentDto.getName(), group, studentDto.getAdress(), studentDto.getCity(),
+				studentDto.getResult(), studentDto.getPhotoPath());
+		group.addEntry(student);
 	}
 }

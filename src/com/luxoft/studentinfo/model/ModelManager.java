@@ -1,7 +1,5 @@
 package com.luxoft.studentinfo.model;
 
-import com.luxoft.studentinfo.util.FileManager;
-
 public class ModelManager {
 
 	private static ModelManager modelManager;
@@ -17,13 +15,8 @@ public class ModelManager {
 	public StateModel getStateModel() {
 		if (stateModel == null) {
 			stateModel = new StateModel();
-			initStateModel();
 		}
 		return stateModel;
 	}
 
-	private void initStateModel() {
-		Group root = FileManager.populate();
-		stateModel.setGroup(root);
-	}
 }
