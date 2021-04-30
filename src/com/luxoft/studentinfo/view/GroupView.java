@@ -52,7 +52,7 @@ public class GroupView extends ViewPart {
 			IStructuredSelection selection = (IStructuredSelection) event.getSelection();
 			Object selectedObject = selection.getFirstElement();
 			ITreeContentProvider provider = (ITreeContentProvider) treeViewer.getContentProvider();
-			if (!provider.hasChildren(selectedObject)) {
+			if (!provider.hasChildren(selectedObject) && selectedObject instanceof Student) {
 				infoAction.run();
 			} else if (treeViewer.getExpandedState(selectedObject)) {
 				treeViewer.collapseToLevel(selectedObject, AbstractTreeViewer.ALL_LEVELS);
