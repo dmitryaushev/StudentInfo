@@ -1,4 +1,4 @@
-package com.luxoft.studentinfo.action;
+package com.luxoft.studentinfo.handler;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;

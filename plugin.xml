@@ -280,31 +280,31 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="com.luxoft.studentinfo.action.OpenStudentInfoHandler"
+            class="com.luxoft.studentinfo.handler.OpenStudentInfoHandler"
             commandId="com.luxoft.studentinfo.OpenStudentInfo">
       </handler>
       <handler
-            class="com.luxoft.studentinfo.action.DeleteHandler"
+            class="com.luxoft.studentinfo.handler.DeleteHandler"
             commandId="com.luxoft.studentinfo.Delete">
       </handler>
       <handler
-            class="com.luxoft.studentinfo.action.EdtitStudentHandler"
+            class="com.luxoft.studentinfo.handler.EdtitStudentHandler"
             commandId="com.luxoft.studentinfo.EditStudent">
       </handler>
       <handler
-            class="com.luxoft.studentinfo.action.AddStudentHandler"
+            class="com.luxoft.studentinfo.handler.AddStudentHandler"
             commandId="com.luxoft.studentinfo.AddStudent">
       </handler>
       <handler
-            class="com.luxoft.studentinfo.action.AddGroupHandler"
+            class="com.luxoft.studentinfo.handler.AddGroupHandler"
             commandId="com.luxoft.studentinfo.AddGroup">
       </handler>
       <handler
-            class="com.luxoft.studentinfo.action.OpenHandler"
+            class="com.luxoft.studentinfo.handler.OpenHandler"
             commandId="com.luxoft.studentinfo.Open">
       </handler>
       <handler
-            class="com.luxoft.studentinfo.action.SaveHandler"
+            class="com.luxoft.studentinfo.handler.SaveHandler"
             commandId="com.luxoft.studentinfo.Save">
       </handler>
    </extension>
