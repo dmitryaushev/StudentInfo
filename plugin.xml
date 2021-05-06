@@ -136,6 +136,7 @@
             locationURI="popup:com.luxoft.studentInfo.GroupView">
          <command
                commandId="com.luxoft.studentinfo.OpenStudentInfo"
+               icon="icons/open_profile20x20.png"
                style="push">
             <visibleWhen
                   checkEnabled="true">
@@ -151,6 +152,7 @@
          </command>
          <command
                commandId="com.luxoft.studentinfo.EditStudent"
+               icon="icons/edit20x20.png"
                style="push">
             <visibleWhen
                   checkEnabled="true">
@@ -167,6 +169,7 @@
          </command>
          <command
                commandId="com.luxoft.studentinfo.AddStudent"
+               icon="icons/add20x20.png"
                style="push">
             <visibleWhen
                   checkEnabled="true">
@@ -183,6 +186,7 @@
          </command>
          <command
                commandId="com.luxoft.studentinfo.AddGroup"
+               icon="icons/add20x20.png"
                style="push">
             <visibleWhen
                   checkEnabled="true">
@@ -199,6 +203,7 @@
          </command>
          <command
                commandId="com.luxoft.studentinfo.Delete"
+               icon="icons/delete20x20.png"
                style="push">
             <visibleWhen
                   checkEnabled="true">
@@ -221,25 +226,25 @@
                id="com.luxoft.studentInfo.toolbar1">
             <command
                   commandId="com.luxoft.studentinfo.Open"
-                  icon="icons/open.png"
+                  icon="icons/open40x40.png"
                   label="Open"
                   style="push">
             </command>
             <command
                   commandId="com.luxoft.studentinfo.Save"
-                  icon="icons/save.png"
+                  icon="icons/save40x40.png"
                   label="Save"
                   style="push">
             </command>
             <command
                   commandId="com.luxoft.studentinfo.Delete"
-                  icon="icons/delete.png"
+                  icon="icons/delete40x40.png"
                   label="Delete"
                   style="push">
             </command>
             <command
                   commandId="com.luxoft.studentinfo.AddStudent"
-                  icon="icons/add.png"
+                  icon="icons/add40x40.png"
                   label="Add Student"
                   style="push">
             </command>
