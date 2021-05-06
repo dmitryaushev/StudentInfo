@@ -58,13 +58,13 @@
             sequence="M1+1">
       </key>
       <key
-            commandId="com.luxoft.studentInfo.open"
+            commandId="com.luxoft.studentinfo.Open"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+2">
       </key>
       <key
-            commandId="com.luxoft.studentInfo.save"
+            commandId="com.luxoft.studentinfo.Save"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+3">
@@ -101,12 +101,12 @@
             name="Edit Student">
       </command>
       <command
-            id="com.luxoft.studentInfo.open"
-            name="Open!">
+            id="com.luxoft.studentinfo.Open"
+            name="Open">
       </command>
       <command
-            id="com.luxoft.studentInfo.save"
-            name="Save!">
+            id="com.luxoft.studentinfo.Save"
+            name="Save">
       </command>
       <command
             id="com.luxoft.studentinfo.Delete"
@@ -214,6 +214,68 @@
             </visibleWhen>
          </command>
       </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="com.luxoft.studentInfo.toolbar1">
+            <command
+                  commandId="com.luxoft.studentinfo.Open"
+                  icon="icons/open.png"
+                  label="Open"
+                  style="push">
+            </command>
+            <command
+                  commandId="com.luxoft.studentinfo.Save"
+                  icon="icons/save.png"
+                  label="Save"
+                  style="push">
+            </command>
+            <command
+                  commandId="com.luxoft.studentinfo.Delete"
+                  icon="icons/delete.png"
+                  label="Delete"
+                  style="push">
+            </command>
+            <command
+                  commandId="com.luxoft.studentinfo.AddStudent"
+                  icon="icons/add.png"
+                  label="Add Student"
+                  style="push">
+            </command>
+         </toolbar>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               id="fileMenu"
+               label="File">
+            <command
+                  commandId="org.eclipse.ui.file.exit"
+                  label="Exit"
+                  style="push">
+            </command>
+         </menu>
+         <menu
+               id="editMenu"
+               label="Edit">
+            <command
+                  commandId="com.luxoft.studentinfo.EditStudent"
+                  label="Edit Student"
+                  style="push">
+            </command>
+         </menu>
+         <menu
+               id="helpMenu"
+               label="Help">
+            <command
+                  commandId="org.eclipse.ui.help.aboutAction"
+                  label="About"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -236,6 +298,14 @@
       <handler
             class="com.luxoft.studentinfo.action.AddGroupHandler"
             commandId="com.luxoft.studentinfo.AddGroup">
+      </handler>
+      <handler
+            class="com.luxoft.studentinfo.action.OpenHandler"
+            commandId="com.luxoft.studentinfo.Open">
+      </handler>
+      <handler
+            class="com.luxoft.studentinfo.action.SaveHandler"
+            commandId="com.luxoft.studentinfo.Save">
       </handler>
    </extension>
 
