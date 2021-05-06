@@ -14,13 +14,13 @@ import com.luxoft.studentinfo.model.Student;
 import com.luxoft.studentinfo.view.InfoEditor;
 import com.luxoft.studentinfo.view.InfoEditorInput;
 
-public class InfoAction extends Action implements ISelectionListener, IWorkbenchAction {
+public class StudentInfoAction extends Action implements ISelectionListener, IWorkbenchAction {
 
-	public final static String ID = "com.luxoft.studentinfo.info";
+	public final static String ID = "com.luxoft.studentinfo.studentInfo";
 	private final IWorkbenchWindow window;
 	private IStructuredSelection selection;
 
-	public InfoAction(IWorkbenchWindow window) {
+	public StudentInfoAction(IWorkbenchWindow window) {
 		this.window = window;
 		setId(ID);
 		setActionDefinitionId(ID);

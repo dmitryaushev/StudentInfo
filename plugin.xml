@@ -52,7 +52,7 @@
             sequence="M1+A">
       </key>
       <key
-            commandId="com.luxoft.studentInfo.editStudent"
+            commandId="com.luxoft.studentinfo.EditStudent"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+1">
@@ -70,50 +70,173 @@
             sequence="M1+3">
       </key>
       <key
-            commandId="com.luxoft.studentInfo.delete"
+            commandId="com.luxoft.studentinfo.Delete"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+4">
       </key>
       <key
-            commandId="com.luxoft.studentInfo.addStudent"
+            commandId="com.luxoft.studentinfo.AddStudent"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+5">
       </key>
       <key
-            commandId="com.luxoft.studentInfo.addGroup"
+            commandId="com.luxoft.studentinfo.AddGroup"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+6">
+      </key>
+      <key
+            commandId="com.luxoft.studentinfo.OpenStudentInfo"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+7">
       </key>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
       <command
-            id="com.luxoft.studentInfo.editStudent"
+            id="com.luxoft.studentinfo.EditStudent"
             name="Edit Student">
       </command>
       <command
             id="com.luxoft.studentInfo.open"
-            name="Open">
+            name="Open!">
       </command>
       <command
             id="com.luxoft.studentInfo.save"
-            name="Save">
+            name="Save!">
       </command>
       <command
-            id="com.luxoft.studentInfo.delete"
+            id="com.luxoft.studentinfo.Delete"
             name="Delete">
       </command>
       <command
-            id="com.luxoft.studentInfo.addStudent"
+            id="com.luxoft.studentinfo.AddStudent"
             name="Add Student">
       </command>
       <command
-            id="com.luxoft.studentInfo.addGroup"
+            id="com.luxoft.studentinfo.AddGroup"
             name="Add Group">
       </command>
+      <command
+            id="com.luxoft.studentinfo.studentInfo"
+            name="Student Info!">
+      </command>
+      <command
+            id="com.luxoft.studentinfo.OpenStudentInfo"
+            name="Open Student Info">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:com.luxoft.studentInfo.GroupView">
+         <command
+               commandId="com.luxoft.studentinfo.OpenStudentInfo"
+               style="push">
+            <visibleWhen
+                  checkEnabled="true">
+               <with
+                     variable="selection">
+                  <iterate
+                        ifEmpty="true">
+                     <adapt
+                           type="com.luxoft.studentinfo.model.Student">
+                     </adapt></iterate>
+               </with>
+            </visibleWhen>
+         </command>
+         <command
+               commandId="com.luxoft.studentinfo.EditStudent"
+               style="push">
+            <visibleWhen
+                  checkEnabled="true">
+               <with
+                     variable="selection">
+                  <iterate
+                        ifEmpty="true">
+                     <adapt
+                           type="com.luxoft.studentinfo.model.Student">
+                     </adapt>
+                  </iterate>
+               </with>
+            </visibleWhen>
+         </command>
+         <command
+               commandId="com.luxoft.studentinfo.AddStudent"
+               style="push">
+            <visibleWhen
+                  checkEnabled="true">
+               <with
+                     variable="selection">
+                  <iterate
+                        ifEmpty="true">
+                     <adapt
+                           type="com.luxoft.studentinfo.model.Group">
+                     </adapt>
+                  </iterate>
+               </with>
+            </visibleWhen>
+         </command>
+         <command
+               commandId="com.luxoft.studentinfo.AddGroup"
+               style="push">
+            <visibleWhen
+                  checkEnabled="true">
+               <with
+                     variable="selection">
+                  <iterate
+                        ifEmpty="true">
+                     <adapt
+                           type="com.luxoft.studentinfo.model.Folder">
+                     </adapt>
+                  </iterate>
+               </with>
+            </visibleWhen>
+         </command>
+         <command
+               commandId="com.luxoft.studentinfo.Delete"
+               style="push">
+            <visibleWhen
+                  checkEnabled="true">
+               <with
+                     variable="selection">
+                  <iterate
+                        ifEmpty="true">
+                     <adapt
+                           type="com.luxoft.studentinfo.model.Entry">
+                     </adapt>
+                  </iterate>
+               </with>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="com.luxoft.studentinfo.action.OpenStudentInfoHandler"
+            commandId="com.luxoft.studentinfo.OpenStudentInfo">
+      </handler>
+      <handler
+            class="com.luxoft.studentinfo.action.DeleteHandler"
+            commandId="com.luxoft.studentinfo.Delete">
+      </handler>
+      <handler
+            class="com.luxoft.studentinfo.action.EdtitStudentHandler"
+            commandId="com.luxoft.studentinfo.EditStudent">
+      </handler>
+      <handler
+            class="com.luxoft.studentinfo.action.AddStudentHandler"
+            commandId="com.luxoft.studentinfo.AddStudent">
+      </handler>
+      <handler
+            class="com.luxoft.studentinfo.action.AddGroupHandler"
+            commandId="com.luxoft.studentinfo.AddGroup">
+      </handler>
    </extension>
 
 </plugin>
