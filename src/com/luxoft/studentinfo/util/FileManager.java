@@ -19,10 +19,11 @@ import com.luxoft.studentinfo.model.StudentDto;
 
 public class FileManager {
 
-	private static Folder folder = ModelManager.getInstance().getStateModel().getFolder();
+	private static Folder folder;
 	private static List<Group> groups = ModelManager.getInstance().getStateModel().getGroups();
 
 	public static void saveToFile(String path) {
+		folder = ModelManager.getInstance().getStateModel().getFolder();
 		Entry[] entries = folder.getEntries();
 		List<StudentDto> studentDtos = new ArrayList<>();
 
@@ -44,6 +45,7 @@ public class FileManager {
 	}
 
 	public static void readFromFile(String path) {
+		folder = ModelManager.getInstance().getStateModel().getFolder();
 		try {
 			groups.clear();
 			String json = Files.readString(Paths.get(path));
