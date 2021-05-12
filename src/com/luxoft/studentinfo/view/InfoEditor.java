@@ -3,17 +3,11 @@ package com.luxoft.studentinfo.view;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.FormAttachment;
-import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.RowData;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IEditorInput;
@@ -27,6 +21,7 @@ public class InfoEditor extends EditorPart {
 
 	public static final String ID = "com.luxoft.studentInfo.InfoEditor";
 	private Student student;
+	private Composite parent;
 
 	public InfoEditor() {
 		// TODO Auto-generated constructor stub
@@ -66,12 +61,14 @@ public class InfoEditor extends EditorPart {
 
 	@Override
 	public void createPartControl(Composite parent) {
+		this.parent = parent;
 		createInputComposite(parent);
 		createPhotoComposite(parent);
 	}
 
 	@Override
 	public void setFocus() {
+		parent.setFocus();
 	}
 	
 	private void createInputComposite(Composite parent) {
