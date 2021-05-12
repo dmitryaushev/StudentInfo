@@ -11,7 +11,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import com.luxoft.studentinfo.util.FileManager;
 import com.luxoft.studentinfo.view.ViewManager;
 
-public class OpenHandler extends AbstractHandler {
+public class OpenFileHandler extends AbstractHandler {
 	
 	public final static String ID = "com.luxoft.studentinfo.Open";
 
@@ -23,7 +23,8 @@ public class OpenHandler extends AbstractHandler {
 		String path = dialog.open();
 		if (path != null) {
 			FileManager.readFromFile(path);
-			ViewManager.getInstance().getTreeViewer().refresh();		
+			ViewManager.getInstance().getTreeViewer().refresh();
+			window.getActivePage().closeAllEditors(false);
 		}
 		return null;
 	}
