@@ -5,6 +5,7 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.window.Window;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
 
@@ -14,6 +15,8 @@ import com.luxoft.studentinfo.model.Folder;
 import com.luxoft.studentinfo.model.Group;
 import com.luxoft.studentinfo.model.ModelManager;
 import com.luxoft.studentinfo.model.Student;
+import com.luxoft.studentinfo.view.InfoEditor;
+import com.luxoft.studentinfo.view.InfoEditorInput;
 import com.luxoft.studentinfo.view.ViewManager;
 
 public class EdtitStudentHandler extends AbstractHandler {
@@ -23,8 +26,10 @@ public class EdtitStudentHandler extends AbstractHandler {
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindow(event);
+		IWorkbenchPage page = window.getActivePage();
 		IStructuredSelection selection = (IStructuredSelection) HandlerUtil.getCurrentSelection(event);
 		Student student = (Student) selection.getFirstElement();
+		InfoEditor editor = (InfoEditor) page.findEditor(new InfoEditorInput(student));
 		
 		PopulateStudentDialog dialog = new PopulateStudentDialog(window.getShell());
 		dialog.setStudent(student);
@@ -50,24 +55,28 @@ public class EdtitStudentHandler extends AbstractHandler {
 				for (Entry e : groups) {
 					if (e.getName().equals(studentGroupName)) {
 						e.removeEntry(student);
+						break;
 					}
 				}
-				for (Entry e : groups) {
-					if (e.getName().equals(groupName)) {
-						group = (Group) e;
+				for(int i = 0; i < groups.length; i++) {
+					if (groups[i].getName().equals(groupName)) {
+						group = (Group) groups[i];
 						student.setGroup(group);
 						group.addEntry(student);
-						ViewManager.getInstance().getTreeViewer().refresh();
-						return null;
+						break;
+					}
+					if (i == groups.length - 1) {
+						group = new Group(folder, groupName);
+						folder.addEntry(group);
+						student.setGroup(group);
+						group.addEntry(student);
 					}
 				}
-				group = new Group(folder, groupName);
-				folder.addEntry(group);
-				student.setGroup(group);
-				group.addEntry(student);
-			}
-			
+			}			
 			ViewManager.getInstance().getTreeViewer().refresh();
+			if (editor != null) {
+				editor.update();				
+			}
 		}
 		return null;
 	}
