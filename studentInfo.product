@@ -3,6 +3,7 @@
 
 <product name="StudentInfo" uid="com.luxoft.studentInfo.product" id="com.luxoft.studentInfo.product" application="com.luxoft.studentInfo.application" useFeatures="false" includeLaunchers="true">
 
+
    <configIni use="default">
    </configIni>
 
@@ -10,6 +11,8 @@
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
       </vmArgsMac>
    </launcherArgs>
+
+   <windowImages i16="/com.luxoft.studentInfo/icons/icon16x16.png" i32="/com.luxoft.studentInfo/icons/icon32x32.png"/>
 
    <splash
       location="com.luxoft.studentInfo" />
@@ -19,11 +22,20 @@
       </win>
    </launcher>
 
+
    <vm>
    </vm>
+
 
    <plugins>
    </plugins>
 
+
+   <preferencesInfo>
+      <targetfile overwrite="false"/>
+   </preferencesInfo>
+
+   <cssInfo>
+   </cssInfo>
 
 </product>

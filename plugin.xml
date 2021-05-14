@@ -15,14 +15,15 @@
          point="org.eclipse.ui.perspectives">
       <perspective
             class="com.luxoft.studentinfo.Perspective"
-            name="RCP Perspective"
-            id="com.luxoft.studentInfo.perspective">
+            id="com.luxoft.studentInfo.perspective"
+            name="RCP Perspective">
       </perspective>
    </extension>
    <extension
          point="org.eclipse.ui.views">
       <view
             class="com.luxoft.studentinfo.view.GroupView"
+            icon="icons/group15x15.png"
             id="com.luxoft.studentInfo.GroupView"
             name="GroupView"
             restorable="true">
@@ -33,6 +34,7 @@
       <editor
             class="com.luxoft.studentinfo.view.InfoEditor"
             default="false"
+            icon="icons/student15x15.png"
             id="com.luxoft.studentInfo.InfoEditor"
             name="InfoEditor">
       </editor>
@@ -46,7 +48,7 @@
             sequence="M1+Q">
       </key>
       <key
-            commandId="org.eclipse.ui.help.aboutAction"
+            commandId="com.luxoft.studentinfo.About"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+A">
@@ -127,6 +129,10 @@
       <command
             id="com.luxoft.studentinfo.OpenStudentInfo"
             name="Open Student Info">
+      </command>
+      <command
+            id="com.luxoft.studentinfo.About"
+            name="About">
       </command>
    </extension>
    <extension
@@ -257,7 +263,24 @@
                id="fileMenu"
                label="File">
             <command
+                  commandId="com.luxoft.studentinfo.Open"
+                  icon="icons/open20x20.png"
+                  label="Open"
+                  style="push">
+            </command>
+            <command
+                  commandId="com.luxoft.studentinfo.Save"
+                  icon="icons/save20x20.png"
+                  label="Save"
+                  style="push">
+            </command>
+            <separator
+                  name="Separator"
+                  visible="true">
+            </separator>
+            <command
                   commandId="org.eclipse.ui.file.exit"
+                  icon="icons/exit20x20.png"
                   label="Exit"
                   style="push">
             </command>
@@ -267,6 +290,7 @@
                label="Edit">
             <command
                   commandId="com.luxoft.studentinfo.EditStudent"
+                  icon="icons/edit20x20.png"
                   label="Edit Student"
                   style="push">
             </command>
@@ -275,7 +299,8 @@
                id="helpMenu"
                label="Help">
             <command
-                  commandId="org.eclipse.ui.help.aboutAction"
+                  commandId="com.luxoft.studentinfo.About"
+                  icon="icons/about20x20.png"
                   label="About"
                   style="push">
             </command>
@@ -291,10 +316,30 @@
       <handler
             class="com.luxoft.studentinfo.handler.DeleteHandler"
             commandId="com.luxoft.studentinfo.Delete">
+         <activeWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <adapt
+                        type="com.luxoft.studentinfo.model.Entry">
+                  </adapt></iterate>
+            </with></activeWhen>
       </handler>
       <handler
             class="com.luxoft.studentinfo.handler.EdtitStudentHandler"
             commandId="com.luxoft.studentinfo.EditStudent">
+         <activeWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <adapt
+                        type="com.luxoft.studentinfo.model.Student">
+                  </adapt></iterate>
+            </with></activeWhen>
       </handler>
       <handler
             class="com.luxoft.studentinfo.handler.AddStudentHandler"
@@ -311,6 +356,10 @@
       <handler
             class="com.luxoft.studentinfo.handler.SaveHandler"
             commandId="com.luxoft.studentinfo.Save">
+      </handler>
+      <handler
+            class="com.luxoft.studentinfo.handler.AboutHandler"
+            commandId="com.luxoft.studentinfo.About">
       </handler>
    </extension>
    <extension
@@ -329,6 +378,10 @@
          <property
                name="appName"
                value="StudentInfo">
+         </property>
+         <property
+               name="windowImages"
+               value="icons/icon16x16.png,icons/icon32x32.png">
          </property>
       </product>
    </extension>
