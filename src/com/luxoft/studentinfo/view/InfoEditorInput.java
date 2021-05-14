@@ -3,11 +3,14 @@ package com.luxoft.studentinfo.view;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IMemento;
 import org.eclipse.ui.IPersistableElement;
 
 import com.luxoft.studentinfo.model.Student;
 
-public class InfoEditorInput implements IEditorInput {
+public class InfoEditorInput implements IEditorInput{
+	
+	public final static String KEY_NAME = "user";
 	
 	private Student student;
 	
@@ -42,8 +45,19 @@ public class InfoEditorInput implements IEditorInput {
 
 	@Override
 	public IPersistableElement getPersistable() {
-		// TODO Auto-generated method stub
-		return null;
+		return new IPersistableElement() {
+			
+			@Override
+			public void saveState(IMemento memento) {
+				memento.putString("studentName", getName());
+				memento.putString("studentGroup", student.getGroup().getName());
+			}
+			
+			@Override
+			public String getFactoryId() {
+				return InfoEditorInputFactory.ID;
+			}
+		};
 	}
 
 	@Override

@@ -305,13 +305,32 @@
             commandId="com.luxoft.studentinfo.AddGroup">
       </handler>
       <handler
-            class="com.luxoft.studentinfo.handler.OpenHandler"
+            class="com.luxoft.studentinfo.handler.OpenFileHandler"
             commandId="com.luxoft.studentinfo.Open">
       </handler>
       <handler
             class="com.luxoft.studentinfo.handler.SaveHandler"
             commandId="com.luxoft.studentinfo.Save">
       </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.elementFactories">
+      <factory
+            class="com.luxoft.studentinfo.view.InfoEditorInputFactory"
+            id="com.luxoft.studentinfo.InfoEditorInput">
+      </factory>
+   </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="com.luxoft.studentInfo.application"
+            name="StudentInfo">
+         <property
+               name="appName"
+               value="StudentInfo">
+         </property>
+      </product>
    </extension>
 
 </plugin>

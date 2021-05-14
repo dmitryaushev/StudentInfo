@@ -27,7 +27,6 @@ import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.eclipse.ui.part.EditorInputTransfer;
 import org.eclipse.ui.part.ViewPart;
 
-import com.luxoft.studentinfo.EditorAreaDropAdapter;
 import com.luxoft.studentinfo.handler.OpenStudentInfoHandler;
 import com.luxoft.studentinfo.model.Entry;
 import com.luxoft.studentinfo.model.Group;
@@ -82,7 +81,6 @@ public class GroupView extends ViewPart {
 									new InfoEditorInput(students[i]));
 						}
 						event.data = inputs;
-						EditorAreaDropAdapter.setInputs(inputs);
 						return;
 					}
 				}
@@ -107,6 +105,12 @@ public class GroupView extends ViewPart {
 				if (object instanceof Student) {
 					Student student = (Student) object;
 					students.add(student);
+				} else if (object instanceof Group) {
+					Entry[] entries = ((Group) object).getEntries();
+					for(Entry entry : entries) {
+						Student student = (Student) entry;
+						students.add(student);
+					}			
 				} else {
 					students.clear();
 					break;
