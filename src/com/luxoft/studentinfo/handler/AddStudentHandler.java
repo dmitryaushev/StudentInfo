@@ -14,6 +14,7 @@ import com.luxoft.studentinfo.model.Folder;
 import com.luxoft.studentinfo.model.Group;
 import com.luxoft.studentinfo.model.ModelManager;
 import com.luxoft.studentinfo.model.Student;
+import com.luxoft.studentinfo.util.IImageKeys;
 import com.luxoft.studentinfo.view.ViewManager;
 
 public class AddStudentHandler extends AbstractHandler {
@@ -24,7 +25,7 @@ public class AddStudentHandler extends AbstractHandler {
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindow(event);
 		IStructuredSelection selection = (IStructuredSelection) HandlerUtil.getCurrentSelection(event);
-		PopulateStudentDialog dialog = new PopulateStudentDialog(window.getShell());
+		PopulateStudentDialog dialog = new PopulateStudentDialog(window.getShell(), true);
 		if (selection != null && selection.getFirstElement() instanceof Group) {
 			Group group = (Group) selection.getFirstElement();
 			dialog.setStudentGroupName(group.getName());
@@ -43,7 +44,11 @@ public class AddStudentHandler extends AbstractHandler {
 			student.setAdress(adress);
 			student.setCity(city);
 			student.setResult(Integer.valueOf(result));
-			student.setPhotoPath(photoPath);
+			if (photoPath.isEmpty()) {
+				student.setPhotoPath(IImageKeys.DEFAULT_PHOTO);
+			} else {
+				student.setPhotoPath(photoPath);				
+			}
 
 			Group group;
 			Folder folder = ModelManager.getInstance().getStateModel().getFolder();

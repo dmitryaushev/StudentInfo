@@ -7,9 +7,4 @@ public class ValidationService {
 			throw new IllegalArgumentException("All fields must be filled");
 		}
 	}
-	public static void validatePhoto(String photoPath) {
-		if (photoPath.isEmpty()) {
-			throw new IllegalArgumentException("No photo selected");
-		}
-	}
 }

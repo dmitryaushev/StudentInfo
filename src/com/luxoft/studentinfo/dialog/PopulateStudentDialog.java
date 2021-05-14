@@ -6,6 +6,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
@@ -38,37 +39,60 @@ public class PopulateStudentDialog extends Dialog {
 
 	private Student student;
 	private String studentGroupName;
+	private boolean isNew;
 
-	public PopulateStudentDialog(Shell parentShell) {
+	public PopulateStudentDialog(Shell parentShell, boolean isNew) {
 		super(parentShell);
+		this.isNew = isNew;
 	}
 
 	@Override
 	protected Control createDialogArea(Composite parent) {
 		Composite composite = (Composite) super.createDialogArea(parent);
 		composite.setLayout(new GridLayout(2, false));
+		
+		GridData labelData = new GridData(GridData.FILL, GridData.CENTER, false, false);
+		GridData textData = new GridData(GridData.BEGINNING, GridData.CENTER, false, false);
+		GridData buttonData = new GridData(SWT.DEFAULT, SWT.FILL, false, false);
+		
+		labelData.horizontalIndent = 12;
+		textData.widthHint = 128;
+		buttonData.horizontalIndent = 12;
 
 		Label nameLabel = new Label(composite, SWT.NONE);
 		nameLabel.setText("Name");
+		nameLabel.setLayoutData(labelData);
 		nameText = new Text(composite, SWT.BORDER);
+		nameText.setLayoutData(textData);
 		Label groupLabel = new Label(composite, SWT.NONE);
 		groupLabel.setText("Group");
+		groupLabel.setLayoutData(labelData);
 		groupText = new Text(composite, SWT.BORDER);
+		groupText.setLayoutData(textData);
 		Label adressLabel = new Label(composite, SWT.NONE);
 		adressLabel.setText("Adress");
+		adressLabel.setLayoutData(labelData);
 		adressText = new Text(composite, SWT.BORDER);
+		adressText.setLayoutData(textData);
 		Label cityLabel = new Label(composite, SWT.NONE);
 		cityLabel.setText("City");
+		cityLabel.setLayoutData(labelData);
 		cityText = new Text(composite, SWT.BORDER);
+		cityText.setLayoutData(textData);
 		Label resultLabel = new Label(composite, SWT.NONE);
 		resultText = new Text(composite, SWT.BORDER);
+		resultText.setLayoutData(textData);
 		resultLabel.setText("Result");
+		resultLabel.setLayoutData(labelData);
 		Label photoNameLabel = new Label(composite, SWT.NONE);
 		photoNameLabel.setText("Photo name");
+		photoNameLabel.setLayoutData(labelData);
 		photoNameText = new Text(composite, SWT.BORDER);
 		photoNameText.setEditable(false);
+		photoNameText.setLayoutData(textData);
 		button = new Button(composite, SWT.PUSH);
 		button.setText("Upload Photo");
+		button.setLayoutData(buttonData);
 
 		addListeners(parent);
 
@@ -90,12 +114,16 @@ public class PopulateStudentDialog extends Dialog {
 	@Override
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setText("Add new student");
+		if (isNew) {
+			newShell.setText("Add new student");			
+		} else {
+			newShell.setText("Edit student");
+		}
 	}
 
 	@Override
 	protected Point getInitialSize() {
-		return new Point(300, 350);
+		return new Point(300, 335);
 	}
 
 	@Override
@@ -103,7 +131,6 @@ public class PopulateStudentDialog extends Dialog {
 		saveInput();
 		try {
 			ValidationService.validateInput(name, group, adress, city, result);
-			ValidationService.validatePhoto(photoPath);
 			super.okPressed();
 		} catch (Exception e) {
 			MessageDialog.openError(ViewManager.getInstance().getTreeViewer().getControl().getShell(), "Error",
