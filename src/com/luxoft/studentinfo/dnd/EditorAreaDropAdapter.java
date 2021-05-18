@@ -1,4 +1,4 @@
-package com.luxoft.studentinfo;
+package com.luxoft.studentinfo.dnd;
 
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.DropTargetAdapter;
@@ -19,11 +19,6 @@ public class EditorAreaDropAdapter extends DropTargetAdapter {
 
 	@Override
 	public void dragEnter(DropTargetEvent event) {
-		event.detail = DND.DROP_COPY;
-	}
-
-	@Override
-	public void dragOperationChanged(DropTargetEvent event) {
 		event.detail = DND.DROP_COPY;
 	}
 

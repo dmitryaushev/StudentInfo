@@ -1,7 +1,5 @@
 package com.luxoft.studentinfo.view;
 
-import java.util.ArrayList;
-
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.NotEnabledException;
 import org.eclipse.core.commands.NotHandledException;
@@ -12,12 +10,8 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.AbstractTreeViewer;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITreeContentProvider;
-import org.eclipse.jface.viewers.ITreeSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.dnd.DND;
-import org.eclipse.swt.dnd.DragSourceAdapter;
-import org.eclipse.swt.dnd.DragSourceEvent;
-import org.eclipse.swt.dnd.DragSourceListener;
 import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
@@ -27,6 +21,7 @@ import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.eclipse.ui.part.EditorInputTransfer;
 import org.eclipse.ui.part.ViewPart;
 
+import com.luxoft.studentinfo.dnd.EditorAreaDragAdapter;
 import com.luxoft.studentinfo.handler.OpenStudentInfoHandler;
 import com.luxoft.studentinfo.model.Entry;
 import com.luxoft.studentinfo.model.Group;
@@ -67,57 +62,10 @@ public class GroupView extends ViewPart {
 		super.dispose();
 	}
 
-	protected void initDragAndDrop() {
+	private void initDragAndDrop() {
 		int operations = DND.DROP_COPY;
 		Transfer[] transfers = new Transfer[] { EditorInputTransfer.getInstance() };
-		DragSourceListener listener = new DragSourceAdapter() {
-			public void dragSetData(DragSourceEvent event) {
-				if (EditorInputTransfer.getInstance().isSupportedType(event.dataType)) {
-					Student[] students = getStudents();
-					EditorInputTransfer.EditorInputData[] inputs = new EditorInputTransfer.EditorInputData[students.length];
-					if (students.length > 0) {
-						for (int i = 0; i < students.length; i++) {
-							inputs[i] = EditorInputTransfer.createEditorInputData(InfoEditor.ID,
-									new InfoEditorInput(students[i]));
-						}
-						event.data = inputs;
-						return;
-					}
-				}
-				event.doit = false;
-			}
-
-			public void dragFinished(DragSourceEvent event) {
-			}
-
-			public void dragStart(DragSourceEvent event) {
-				super.dragStart(event);
-			}
-		};
-		treeViewer.addDragSupport(operations, transfers, listener);
-	}
-
-	private Student[] getStudents() {
-		ITreeSelection selection = treeViewer.getStructuredSelection();
-		ArrayList<Student> students = new ArrayList<>();
-		if (!selection.isEmpty()) {
-			for (Object object : selection.toArray()) {
-				if (object instanceof Student) {
-					Student student = (Student) object;
-					students.add(student);
-				} else if (object instanceof Group) {
-					Entry[] entries = ((Group) object).getEntries();
-					for(Entry entry : entries) {
-						Student student = (Student) entry;
-						students.add(student);
-					}			
-				} else {
-					students.clear();
-					break;
-				}
-			}
-		}
-		return students.toArray(new Student[] {});
+		treeViewer.addDragSupport(operations, transfers, new EditorAreaDragAdapter());
 	}
 
 	private void setGroupsToTreeViewer() {
