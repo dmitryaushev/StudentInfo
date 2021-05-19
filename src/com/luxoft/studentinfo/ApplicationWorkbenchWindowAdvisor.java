@@ -30,6 +30,6 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
         configurer.setTitle("Student info");
         
         configurer.addEditorAreaTransfer(EditorInputTransfer.getInstance());
-        configurer.configureEditorAreaDropListener(new EditorAreaDropAdapter(configurer.getWindow()));
+        configurer.configureEditorAreaDropListener(new EditorAreaDropAdapter());
     }
 }

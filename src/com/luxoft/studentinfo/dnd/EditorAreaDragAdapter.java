@@ -1,6 +1,7 @@
 package com.luxoft.studentinfo.dnd;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.jface.viewers.ITreeSelection;
 import org.eclipse.swt.dnd.DragSourceAdapter;
@@ -19,12 +20,12 @@ public class EditorAreaDragAdapter extends DragSourceAdapter {
 	@Override
 	public void dragSetData(DragSourceEvent event) {
 		if (EditorInputTransfer.getInstance().isSupportedType(event.dataType)) {
-			Student[] students = getStudents();
-			EditorInputTransfer.EditorInputData[] inputs = new EditorInputTransfer.EditorInputData[students.length];
-			if (students.length > 0) {
-				for (int i = 0; i < students.length; i++) {
+			List<Student> students = getStudents();
+			EditorInputTransfer.EditorInputData[] inputs = new EditorInputTransfer.EditorInputData[students.size()];
+			if (students.size() > 0) {
+				for (int i = 0; i < students.size(); i++) {
 					inputs[i] = EditorInputTransfer.createEditorInputData(InfoEditor.ID,
-							new InfoEditorInput(students[i]));
+							new InfoEditorInput(students.get(i)));
 				}
 				event.data = inputs;
 				return;
@@ -33,7 +34,7 @@ public class EditorAreaDragAdapter extends DragSourceAdapter {
 		event.doit = false;
 	}
 	
-	private Student[] getStudents() {
+	private List<Student> getStudents() {
 		ITreeSelection selection = ViewManager.getInstance().getTreeViewer().getStructuredSelection();
 		ArrayList<Student> students = new ArrayList<>();
 		if (!selection.isEmpty()) {
@@ -53,6 +54,6 @@ public class EditorAreaDragAdapter extends DragSourceAdapter {
 				}
 			}
 		}
-		return students.toArray(new Student[] {});
+		return students;
 	}
 }
