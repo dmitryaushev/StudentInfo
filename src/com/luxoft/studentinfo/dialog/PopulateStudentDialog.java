@@ -39,11 +39,11 @@ public class PopulateStudentDialog extends Dialog {
 
 	private Student student;
 	private String studentGroupName;
-	private boolean isNew;
+	private String dialogTitle;
 
-	public PopulateStudentDialog(Shell parentShell, boolean isNew) {
+	public PopulateStudentDialog(Shell parentShell, String dialogTitle) {
 		super(parentShell);
-		this.isNew = isNew;
+		this.dialogTitle = dialogTitle;
 	}
 
 	@Override
@@ -95,30 +95,15 @@ public class PopulateStudentDialog extends Dialog {
 		button.setLayoutData(buttonData);
 
 		addListeners(parent);
-
-		if (student != null) {
-			nameText.setText(student.getName());
-			groupText.setText(student.getGroup().getName());
-			adressText.setText(student.getAdress());
-			cityText.setText(student.getCity());
-			resultText.setText(String.valueOf(student.getResult()));
-			photoNameText.setText(student.getPhotoPath());
-		}
-		if (studentGroupName != null) {
-			groupText.setText(studentGroupName);
-			groupText.setEditable(false);
-		}
+		populateFields();
+		
 		return composite;
 	}
 
 	@Override
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		if (isNew) {
-			newShell.setText("Add new student");			
-		} else {
-			newShell.setText("Edit student");
-		}
+		newShell.setText(dialogTitle);
 	}
 
 	@Override
@@ -185,6 +170,21 @@ public class PopulateStudentDialog extends Dialog {
 				text.setText(input);
 				text.setSelection(input.length());
 			}
+		}
+	}
+	
+	private void populateFields() {
+		if (student != null) {
+			nameText.setText(student.getName());
+			groupText.setText(student.getGroup().getName());
+			adressText.setText(student.getAdress());
+			cityText.setText(student.getCity());
+			resultText.setText(String.valueOf(student.getResult()));
+			photoNameText.setText(student.getPhotoPath());
+		}
+		if (studentGroupName != null) {
+			groupText.setText(studentGroupName);
+			groupText.setEditable(false);
 		}
 	}
 

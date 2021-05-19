@@ -25,7 +25,7 @@ public class AddStudentHandler extends AbstractHandler {
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindow(event);
 		IStructuredSelection selection = (IStructuredSelection) HandlerUtil.getCurrentSelection(event);
-		PopulateStudentDialog dialog = new PopulateStudentDialog(window.getShell(), true);
+		PopulateStudentDialog dialog = new PopulateStudentDialog(window.getShell(), "Add new student");
 		if (selection != null && selection.getFirstElement() instanceof Group) {
 			Group group = (Group) selection.getFirstElement();
 			dialog.setStudentGroupName(group.getName());

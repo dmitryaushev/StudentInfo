@@ -31,7 +31,7 @@ public class EdtitStudentHandler extends AbstractHandler {
 		Student student = (Student) selection.getFirstElement();
 		InfoEditor editor = (InfoEditor) page.findEditor(new InfoEditorInput(student));
 		
-		PopulateStudentDialog dialog = new PopulateStudentDialog(window.getShell(), false);
+		PopulateStudentDialog dialog = new PopulateStudentDialog(window.getShell(), "Edit student");
 		dialog.setStudent(student);
 		if (dialog.open() == Window.OK) {
 			String name = dialog.getName();
