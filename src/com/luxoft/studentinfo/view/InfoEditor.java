@@ -281,15 +281,15 @@ public class InfoEditor extends EditorPart {
 		if (!student.getGroup().getName().equals(newGroup)) {
 			student.getParent().removeEntry(student);
 			Folder folder = ModelManager.getInstance().getStateModel().getFolder();
-			Entry[] entries = folder.getEntries();
-			for(int i = 0; i < entries.length; i++) {
-				if (entries[i].getName().equals(newGroup)) {
-					Group group = (Group) entries[i];
+			List<Entry> entries = folder.getEntries();
+			for(int i = 0; i < entries.size(); i++) {
+				if (entries.get(i).getName().equals(newGroup)) {
+					Group group = (Group) entries.get(i);
 					student.setGroup(group);
 					group.addEntry(student);
 					break;
 				}
-				if (i == entries.length - 1) {
+				if (i == entries.size() - 1) {
 					Group group = new Group(folder, newGroup);
 					folder.addEntry(group);
 					student.setGroup(group);

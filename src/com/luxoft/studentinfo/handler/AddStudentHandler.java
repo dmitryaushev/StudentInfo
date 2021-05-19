@@ -1,5 +1,7 @@
 package com.luxoft.studentinfo.handler;
 
+import java.util.List;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -52,7 +54,7 @@ public class AddStudentHandler extends AbstractHandler {
 
 			Group group;
 			Folder folder = ModelManager.getInstance().getStateModel().getFolder();
-			Entry[] groups = folder.getEntries();
+			List<Entry> groups = folder.getEntries();
 
 			for (Entry e : groups) {
 				if (e.getName().equals(groupName)) {

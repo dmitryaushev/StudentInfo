@@ -43,7 +43,7 @@ public class EditorAreaDragAdapter extends DragSourceAdapter {
 					Student student = (Student) object;
 					students.add(student);
 				} else if (object instanceof Group) {
-					Entry[] entries = ((Group) object).getEntries();
+					List<Entry> entries = ((Group) object).getEntries();
 					for(Entry entry : entries) {
 						Student student = (Student) entry;
 						students.add(student);

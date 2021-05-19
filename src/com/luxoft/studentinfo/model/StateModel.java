@@ -33,8 +33,8 @@ public class StateModel {
 	
 	public Folder getFolder() {
 		Folder folder;
-		if (root.getEntries().length != 0) {
-			folder = (Folder) root.getEntries()[0];
+		if (root.getEntries().size() != 0) {
+			folder = (Folder) root.getEntries().get(0);
 		} else {
 			folder = new Folder(root, "Folder");
 			root.addEntry(folder);

@@ -24,12 +24,12 @@ public class FileManager {
 
 	public static void saveToFile(String path) {
 		folder = ModelManager.getInstance().getStateModel().getFolder();
-		Entry[] entries = folder.getEntries();
+		List<Entry> entries = folder.getEntries();
 		List<StudentDto> studentDtos = new ArrayList<>();
 
 		for (Entry entry : entries) {
 			Group group = (Group) entry;
-			Entry[] students = group.getEntries();
+			List<Entry> students = group.getEntries();
 			for (Entry s : students) {
 				Student student = (Student) s;
 				StudentDto studentDto = toDto(student);

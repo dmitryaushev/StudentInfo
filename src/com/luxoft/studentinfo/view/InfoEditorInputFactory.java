@@ -1,5 +1,7 @@
 package com.luxoft.studentinfo.view;
 
+import java.util.List;
+
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.ui.IElementFactory;
 import org.eclipse.ui.IMemento;
@@ -21,7 +23,7 @@ public class InfoEditorInputFactory implements IElementFactory {
 		Student student = null;
 		
 		Folder folder = ModelManager.getInstance().getStateModel().getFolder();
-		Entry[] entries = folder.getEntries();
+		List<Entry> entries = folder.getEntries();
 		for(Entry entry : entries) {
 			if (entry.getName().equals(groupName)) {
 				Group group = (Group) entry;

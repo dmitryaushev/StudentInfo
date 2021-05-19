@@ -6,6 +6,7 @@ import org.eclipse.ui.model.IWorkbenchAdapter;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 import com.luxoft.studentinfo.Application;
+import com.luxoft.studentinfo.model.Entry;
 import com.luxoft.studentinfo.model.Folder;
 import com.luxoft.studentinfo.model.Group;
 import com.luxoft.studentinfo.model.Student;
@@ -33,7 +34,7 @@ public class AdapterFactory implements IAdapterFactory {
 
 		@Override
 		public Object[] getChildren(Object o) {
-			return ((Group) o).getEntries();
+			return ((Group) o).getEntries().toArray();
 		}
 	};
 	
@@ -57,7 +58,7 @@ public class AdapterFactory implements IAdapterFactory {
 
 		@Override
 		public Object[] getChildren(Object o) {
-			return ((Folder) o).getEntries();
+			return ((Folder) o).getEntries().toArray();
 		}
 	};
 

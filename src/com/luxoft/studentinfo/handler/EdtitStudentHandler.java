@@ -1,5 +1,7 @@
 package com.luxoft.studentinfo.handler;
 
+import java.util.List;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -51,21 +53,21 @@ public class EdtitStudentHandler extends AbstractHandler {
 			if (!studentGroupName.equals(groupName)) {
 				Group group;
 				Folder folder = ModelManager.getInstance().getStateModel().getFolder();
-				Entry[] groups = folder.getEntries();
+				List<Entry> groups = folder.getEntries();
 				for (Entry e : groups) {
 					if (e.getName().equals(studentGroupName)) {
 						e.removeEntry(student);
 						break;
 					}
 				}
-				for(int i = 0; i < groups.length; i++) {
-					if (groups[i].getName().equals(groupName)) {
-						group = (Group) groups[i];
+				for(int i = 0; i < groups.size(); i++) {
+					if (groups.get(i).getName().equals(groupName)) {
+						group = (Group) groups.get(i);
 						student.setGroup(group);
 						group.addEntry(student);
 						break;
 					}
-					if (i == groups.length - 1) {
+					if (i == groups.size() - 1) {
 						group = new Group(folder, groupName);
 						folder.addEntry(group);
 						student.setGroup(group);
