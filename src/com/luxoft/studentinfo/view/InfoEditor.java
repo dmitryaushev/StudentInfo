@@ -21,7 +21,12 @@ import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
 
+import com.luxoft.studentinfo.model.Entry;
+import com.luxoft.studentinfo.model.Folder;
+import com.luxoft.studentinfo.model.Group;
+import com.luxoft.studentinfo.model.ModelManager;
 import com.luxoft.studentinfo.model.Student;
+import com.luxoft.studentinfo.util.ValidationService;
 
 public class InfoEditor extends EditorPart {
 
@@ -39,6 +44,7 @@ public class InfoEditor extends EditorPart {
 
 	private List<String> undoStack;
 	private List<String> redoStack;
+	private boolean isSave = true;
 
 	public InfoEditor() {
 		// TODO Auto-generated constructor stub
@@ -47,14 +53,19 @@ public class InfoEditor extends EditorPart {
 	@Override
 	public void doSave(IProgressMonitor monitor) {
 		String newName = nameText.getText();
-		if (!newName.trim().isEmpty()) {
-			student.setName(newName);
+		String newGroup = groupText.getText();
+		String newAdress = adressText.getText();
+		String newCity = cityText.getText();
+		String newResult = resultText.getText();
+		try {
+			ValidationService.validateInput(newName, newGroup, newAdress, newCity, newResult);
 			setPartName(newName);
+			populateStudent(newName, newGroup, newAdress, newCity, newResult);
 			ViewManager.getInstance().getTreeViewer().refresh();
 			isDirty = false;
 			firePropertyChange(PROP_DIRTY);
-		} else {
-			MessageDialog.openError(parent.getShell(), "Empty name", "Name should not be empty");
+		} catch (IllegalArgumentException e) {
+			MessageDialog.openError(parent.getShell(), "Empty field", e.getMessage());
 			monitor.setCanceled(true);
 		}
 	}
@@ -88,11 +99,18 @@ public class InfoEditor extends EditorPart {
 	public void createPartControl(Composite parent) {
 		this.parent = parent;
 		undoStack = new LinkedList<>();
-		undoStack.add(0, student.getName());
 		redoStack = new LinkedList<>();
 		createInputComposite();
 		createPhotoComposite();
-		addListeners();
+		addListeners(nameText);
+		addListeners(groupText);
+		addListeners(adressText);
+		addListeners(cityText);
+		addListeners(resultText);
+
+		String defaultState = String.format("%s/%s/%s/%s/%s", student.getName(), student.getGroup().getName(),
+				student.getAdress(), student.getCity(), student.getResult());
+		undoStack.add(0, defaultState);
 	}
 
 	@Override
@@ -130,27 +148,22 @@ public class InfoEditor extends EditorPart {
 		nameLabel.setLayoutData(labelData);
 		nameText.setText(student.getName());
 		nameText.setLayoutData(textData);
-		nameText.setSelection(nameText.getText().length());
 		groupLabel.setText("Group");
 		groupLabel.setLayoutData(labelData);
 		groupText.setText(student.getGroup().getName());
 		groupText.setLayoutData(textData);
-		groupText.setEditable(false);
 		adressLabel.setText("Adress");
 		adressLabel.setLayoutData(labelData);
 		adressText.setText(student.getAdress());
 		adressText.setLayoutData(textData);
-		adressText.setEditable(false);
 		cityLabel.setText("City");
 		cityLabel.setLayoutData(labelData);
 		cityText.setText(student.getCity());
 		cityText.setLayoutData(textData);
-		cityText.setEditable(false);
 		resultLabel.setText("Result");
 		resultLabel.setLayoutData(labelData);
 		resultText.setText(String.valueOf(student.getResult()));
 		resultText.setLayoutData(textData);
-		resultText.setEditable(false);
 	}
 
 	private void createPhotoComposite() {
@@ -186,17 +199,25 @@ public class InfoEditor extends EditorPart {
 
 	}
 
-	private void addListeners() {
-		nameText.addModifyListener(listener -> {
-			if (!student.getName().equals(nameText.getText())) {
+	private void addListeners(Text text) {
+		text.addModifyListener(listener -> {
+			if (!student.getName().equals(nameText.getText())
+					|| !student.getGroup().getName().equals(groupText.getText())
+					|| !student.getAdress().equals(adressText.getText())
+					|| !student.getCity().equals(cityText.getText())
+					|| student.getResult() != Integer.valueOf(resultText.getText())) {
 				isDirty = true;
 			} else {
 				isDirty = false;
 			}
-			undoStack.add(0, nameText.getText());
+			if (isSave) {
+				String state = String.format("%s/%s/%s/%s/%s", nameText.getText(), groupText.getText(),
+						adressText.getText(), cityText.getText(), resultText.getText());
+				undoStack.add(0, state);
+			}			
 			firePropertyChange(PROP_DIRTY);
 		});
-		nameText.addKeyListener(new KeyAdapter() {
+		text.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				boolean isCtrlPressed = (e.stateMask & SWT.CTRL) > 0;
@@ -215,15 +236,53 @@ public class InfoEditor extends EditorPart {
 	private void undo() {
 		if (undoStack.size() > 1) {
 			redoStack.add(0, undoStack.remove(0));
-			nameText.setText(undoStack.remove(0));
+			String[] state = undoStack.remove(0).split("/");
+			isSave = false;
+			nameText.setText(state[0]);
+			groupText.setText(state[1]);
+			adressText.setText(state[2]);
+			cityText.setText(state[3]);
+			isSave = true;
+			resultText.setText(state[4]);
 		}
-		nameText.setSelection(nameText.getText().length());
 	}
 
 	private void redo() {
 		if (redoStack.size() > 0) {
-			nameText.setText(redoStack.remove(0));
+			String[] state = redoStack.remove(0).split("/");
+			isSave = false;
+			nameText.setText(state[0]);
+			groupText.setText(state[1]);
+			adressText.setText(state[2]);
+			cityText.setText(state[3]);
+			isSave = true;
+			resultText.setText(state[4]);
 		}
-		nameText.setSelection(nameText.getText().length());
+	}
+	
+	private void populateStudent(String newName, String newGroup, String newAdress, String newCity, String newResult) {
+		student.setName(newName);
+		student.setAdress(newAdress);
+		student.setCity(newCity);
+		student.setResult(Integer.valueOf(newResult));
+		if (!student.getGroup().getName().equals(newGroup)) {
+			student.getParent().removeEntry(student);
+			Folder folder = ModelManager.getInstance().getStateModel().getFolder();
+			Entry[] entries = folder.getEntries();
+			for(int i = 0; i < entries.length; i++) {
+				if (entries[i].getName().equals(newGroup)) {
+					Group group = (Group) entries[i];
+					student.setGroup(group);
+					group.addEntry(student);
+					break;
+				}
+				if (i == entries.length - 1) {
+					Group group = new Group(folder, newGroup);
+					folder.addEntry(group);
+					student.setGroup(group);
+					group.addEntry(student);
+				}
+			}
+		}
 	}
 }
