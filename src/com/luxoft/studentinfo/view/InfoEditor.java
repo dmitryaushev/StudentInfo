@@ -1,5 +1,7 @@
 package com.luxoft.studentinfo.view;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -26,6 +28,7 @@ import com.luxoft.studentinfo.model.Folder;
 import com.luxoft.studentinfo.model.Group;
 import com.luxoft.studentinfo.model.ModelManager;
 import com.luxoft.studentinfo.model.Student;
+import com.luxoft.studentinfo.util.IImageKeys;
 import com.luxoft.studentinfo.util.ValidationService;
 
 public class InfoEditor extends EditorPart {
@@ -171,7 +174,17 @@ public class InfoEditor extends EditorPart {
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new FillLayout());
 
-		Image image = new Image(parent.getDisplay(), student.getPhotoPath());
+		FileInputStream fileInputStream = null;
+		try {
+			fileInputStream = new FileInputStream(student.getPhotoPath());
+		} catch (FileNotFoundException e) {
+		}	
+		Image image;
+		if (fileInputStream != null) {
+			image = new Image(parent.getDisplay(), fileInputStream);
+		} else {
+			image = new Image(parent.getDisplay(), IImageKeys.DEFAULT_PHOTO);
+		}
 		canvas = new Canvas(composite, SWT.NONE);
 		canvas.addPaintListener(listener -> {
 			if (image != null) {
